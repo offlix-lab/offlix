@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+    <title>API tutorial</title>
+    <style>
+        img{
+            width: 250px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+
+
+    </div> 
+
+
+    <button onclick="sharePage()">Share</button>
+    <script>
+
+        const app = document.querySelector("#app");
+        const api = "http://offlix.atwebpages.com/src/b/sh_st.php";
+
+        const data = new FormData();
+
+
+        data.append("sh_st", "all");
+        data.append("grade", 10);
+        data.append("section", "E");
+        data.append("sex", "M");
+        data.append("semister", 1);
+        data.append("limit", 30);
+
+        
+        async function getData() {
+            const res =  await fetch(api,{
+                method:"post",
+                body:data
+        });
+
+
+        if (res.ok) {
+            const jsonData = await res.json();
+            for (let i = 0; i < jsonData.data.length; i++) {
+                let h1 = document.createElement("h1");
+                let name = jsonData.data[i].name;
+                h1.append(name);
+                app.appendChild(h1)
+            }
+            console.log(jsonData.data.length);   
+        } else {
+            console.log("something gone wrong");
+        }
+        }
+
+        getData();
+
+
+
+
+        addEventListener("offline",()=>{
+            alert("YOU ARE OFFLINE");
+            console.log("YOU ARE OFFLINE");
+        })
+
+        
+        addEventListener("online",()=>{
+            alert("YOU ARE ONLINE");
+            console.log("YOU ARE ONLINE");
+        })
+
+async function sharePage() {
+  const data = {
+    title: "My Website",
+    text: "Check this out!",
+    url: window.location.href,
+  };
+
+  try {
+    if (navigator.share) {
+      await navigator.share(data);
+      console.log("Shared successfully");
+    } else {
+      await navigator.clipboard.writeText(data.url);
+      alert("Copied link instead (share not supported)");
+    }
+  } catch (err) {
+    console.log("Share cancelled or failed", err);
+  }
+}
+    </script>
+</body>
+</html>
