@@ -4,7 +4,7 @@ export default async function handler(req, res) {
       "http://offlix.atwebpages.com/src/b/sh_st.php"
     );
 
-    const data = await response.text();
+    const data = await response.json();
 
     res.status(200).send(data);
 
