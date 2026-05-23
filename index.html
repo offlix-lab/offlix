@@ -22,7 +22,7 @@
     <script>
 
         const app = document.querySelector("#app");
-        const api = "http://offlix.atwebpages.com/src/b/sh_st.php";
+        const api = "/api/status";
 
         const data = new FormData();
 
@@ -34,30 +34,36 @@
         data.append("semister", 1);
         data.append("limit", 30);
 
-        
-        async function getData() {
+        try {
+            async function getData() {
             const res =  await fetch(api,{
                 method:"post",
-                body:data
-        });
+                body:data            
+            });
 
-
-        if (res.ok) {
-            const jsonData = await res.json();
-            for (let i = 0; i < jsonData.data.length; i++) {
-                let h1 = document.createElement("h1");
-                let name = jsonData.data[i].name;
-                h1.append(name);
-                app.appendChild(h1)
+            if (res.ok) {
+                const jsonData = await res.json();
+                for (let i = 0; i < jsonData.data.length; i++) {
+                    let h1 = document.createElement("h1");
+                    let name = jsonData.data[i].name;
+                    h1.append(name);
+                    app.appendChild(h1)
+                }
+                console.log(jsonData.data.length);   
+            } else {
+                console.log("something gone wrong");
             }
-            console.log(jsonData.data.length);   
-        } else {
-            console.log("something gone wrong");
         }
-        }
-
         getData();
+    } catch (err){
+    console.log("gh");            
+}
+        
+        
 
+
+
+ 
 
 
 
