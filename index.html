@@ -24,21 +24,25 @@
 const app = document.querySelector("#app");
 const api = "/api/status";
 
-const data = new FormData();
 
-data.append("sh_st", "all");
-data.append("grade", 10);
-data.append("section", "E");
-data.append("sex", "M");
-data.append("semister", 1);
-data.append("limit", 30);
+const data = {
+    sh_st: "all",
+    grade: 10,
+    section: "E",
+    sex: "M",
+    semister: 1,
+    limit: 30
+};
 
 async function getData() {
     try {
 
         const res = await fetch(api, {
             method: "POST",
-            body: data
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
         });
 
         if (res.ok) {

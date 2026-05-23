@@ -2,29 +2,36 @@ export default async function handler(req, res) {
 
     try {
 
+        const {
+            sh_st,
+            grade,
+            section,
+            sex,
+            semister,
+            limit
+        } = req.body;
+
         const formData = new URLSearchParams();
 
-        formData.append("sh_st", req.body.sh_st);
-        formData.append("grade", req.body.grade);
-        formData.append("section", req.body.section);
-        formData.append("sex", req.body.sex);
-        formData.append("semister", req.body.semister);
-        formData.append("limit", req.body.limit);
+        formData.append("sh_st", sh_st);
+        formData.append("grade", grade);
+        formData.append("section", section);
+        formData.append("sex", sex);
+        formData.append("semister", semister);
+        formData.append("limit", limit);
 
         const response = await fetch(
             "http://offlix.atwebpages.com/src/b/sh_st.php",
             {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
+                    "Content-Type": "application/x-www-form-urlencoded"
                 },
-                body: formData
+                body: formData.toString()
             }
         );
 
         const text = await response.text();
-
-        console.log(text);
 
         res.status(200).send(text);
 
