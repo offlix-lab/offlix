@@ -1,7 +1,7 @@
 export default async function handler(req, res) {
 
     try {
-        
+
         const formData = new URLSearchParams();
 
         formData.append("sh_st", "all");
@@ -13,7 +13,7 @@ export default async function handler(req, res) {
 
         const fullUrl = `http://offlix.atwebpages.com/src/b/sh_st.php?${formData.toString()}`;
 
-        const response = await fetch("",{
+        const response = await fetch(fullUrl,{
                 method: "GET",
             }
         );
