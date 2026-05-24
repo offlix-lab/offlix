@@ -13,12 +13,12 @@ export default async function handler(req, res) {
 
         const formData = new URLSearchParams();
 
-        formData.append("sh_st", sh_st);
-        formData.append("grade", grade);
-        formData.append("section", section);
-        formData.append("sex", sex);
-        formData.append("semister", semister);
-        formData.append("limit", limit);
+        formData.append("sh_st", "all");
+        formData.append("grade", "10");
+        formData.append("section", "E");
+        formData.append("sex", "all");
+        formData.append("semister", "1");
+        formData.append("limit", "20");
 
         const fullUrl = `http://offlix.atwebpages.com/src/b/sh_st.php?${formData.toString()}`;
 
