@@ -1,16 +1,7 @@
 export default async function handler(req, res) {
 
     try {
-
-        const {
-            sh_st,
-            grade,
-            section,
-            sex,
-            semister,
-            limit
-        } = req.body;
-
+        
         const formData = new URLSearchParams();
 
         formData.append("sh_st", "all");
