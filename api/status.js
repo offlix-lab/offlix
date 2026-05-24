@@ -20,14 +20,10 @@ export default async function handler(req, res) {
         formData.append("semister", semister);
         formData.append("limit", limit);
 
-        const response = await fetch(
-            "http://offlix.atwebpages.com/src/b/sh_st.php",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded"
-                },
-                body: formData.toString()
+        const fullUrl = `http://offlix.atwebpages.com/src/b/sh_st.php?${formData.toString()}`;
+
+        const response = await fetch("",{
+                method: "GET",
             }
         );
 
